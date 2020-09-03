@@ -1,13 +1,11 @@
 package controller
 
 import (
-	"connecting-firebase-rest-api/entity"
-	"connecting-firebase-rest-api/errors"
-	"connecting-firebase-rest-api/service"
+	"clean-go-architecture/entity"
+	"clean-go-architecture/errors"
+	"clean-go-architecture/service"
 	"encoding/json"
-	"errors"
 	"fmt"
-	"math/rand"
 	"net/http"
 )
 
@@ -23,7 +21,7 @@ type PostController interface {
 }
 
 func NewPostController() PostController {
-	return &controller
+	return &controller{}
 }
 
 func (*controller) GetPosts(resp http.ResponseWriter, req *http.Request) {

@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"connecting-firebase-rest-api/entity"
+	"clean-go-architecture/entity"
 )
 
 type PostRepository interface {

@@ -4,6 +4,7 @@ import (
 	"clean-go-architecture/entity"
 	"clean-go-architecture/repository"
 	"errors"
+	"math/rand"
 )
 
 var (
@@ -13,7 +14,7 @@ var (
 type PostService interface {
 	Validate(post *entity.Post) error
 	Create(post *entity.Post) (*entity.Post, error)
-	FindAll() (*entity.Post, error)
+	FindAll() ([]entity.Post, error)
 }
 
 type service struct{}
@@ -45,7 +46,7 @@ func (*service) Create(post *entity.Post) (*entity.Post, error) {
 
 }
 
-func (*service) FindAll() (*entity.Post, error) {
+func (*service) FindAll() ([]entity.Post, error) {
 
 	return repo.FindAll()
 

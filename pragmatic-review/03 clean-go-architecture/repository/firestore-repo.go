@@ -1,8 +1,8 @@
 package repository
 
 import (
+	"clean-go-architecture/entity"
 	"cloud.google.com/go/firestore"
-	"connecting-firebase-rest-api/entity"
 	"context"
 	"fmt"
 	"google.golang.org/api/iterator"
