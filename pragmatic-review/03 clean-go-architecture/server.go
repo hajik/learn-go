@@ -3,12 +3,16 @@ package main
 import (
 	"clean-go-architecture/controller"
 	router "clean-go-architecture/http"
+	"clean-go-architecture/repository"
+	"clean-go-architecture/service"
 	"fmt"
 	"net/http"
 )
 
 var (
-	postController controller.PostController = controller.NewPostController()
+	postRepository repository.PostRepository = repository.NewFirestoreRepository()
+	postService    service.PostService       = service.NewPostService(postRepository)
+	postController controller.PostController = controller.NewPostController(postService)
 	httpRouter     router.Router             = router.NewChiRouter()
 	// httpRouter     router.Router             = router.NewMuxRouter()
 )
