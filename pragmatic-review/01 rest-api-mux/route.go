@@ -1,15 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"encoding/json"
+	"strings"
 )
 
 type Post struct {
-	Id 		int 	`json:"id"`
-	Title 	string 	`json:"title"`
-	Text 	string 	`json:"text"`
+	Id    int    `json:"id"`
+	Title string `json:"title"`
+	Text  string `json:"text"`
 }
 
 var (
@@ -17,7 +18,7 @@ var (
 )
 
 func init() {
-	posts = []Post{Post{Id: 1, Title: "Title 1", Text: "Text 1"}}
+	posts = []Post{{Id: 1, Title: "Title 1", Text: "Text 1"}}
 }
 
 func getPosts(resp http.ResponseWriter, req *http.Request) {
@@ -28,27 +29,32 @@ func getPosts(resp http.ResponseWriter, req *http.Request) {
 		resp.Write([]byte(`{"error": "Error marshalling the posts array"}`))
 		return
 	}
-	
+
 	resp.WriteHeader(http.StatusOK)
 	resp.Write(result)
 }
 
 func addPost(resp http.ResponseWriter, req *http.Request) {
+
 	var post Post
 
-	decoder := json.NewDecoder(req.Body)
+	const jsonStream = `{"Id": 11, "Title": "Title 1", "Text": "Text 1"}`
+
+	decoder := json.NewDecoder(strings.NewReader(jsonStream))
 
 	if err := decoder.Decode(&post); err != nil {
-		fmt.Println(err)
+		fmt.Println("Error decode => ", err)
 		resp.WriteHeader(http.StatusInternalServerError)
 		resp.Write([]byte(`{"error": "Error unmarshalling the posts array"}`))
 		return
 	}
 
-	post.Id = len(posts)+1
+	// post.Id = len(posts) + 1
 	posts = append(posts, post)
 	resp.WriteHeader(http.StatusOK)
 	result, _ := json.Marshal(post)
 	resp.Write(result)
+
+	fmt.Println(posts)
 
 }
