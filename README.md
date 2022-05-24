@@ -1,4 +1,3 @@
 # learn-go-clean-architecture
-Belajar go clean architecture 
-
-// belajar dari channel pragmatic review
+// yt : pragmatic review
+// source: https://www.youtube.com/watch?v=kd-8mb6HfGA&list=PL3eAkoh7fypqUQUQPn-bXtfiYT_ZSVKmB&ab_channel=PragmaticReviews
